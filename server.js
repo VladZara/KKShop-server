@@ -23,8 +23,8 @@ app.use(bodyParser.json());
 //cookie parser
 app.use(cookieParser());
 
-
 //mount routes
+app.use("/api/products", products)
 app.use("/api/auth", auth);
 
 

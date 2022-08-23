@@ -2,6 +2,8 @@ const express = require("express");
 const dotenv = require("dotenv");
 const connectDB = require("./config/db");
 const errorHandler = require("./middleware/error");
+const bodyParser = require("body-parser");
+const cookieParser = require("cookie-parser");
 
 
 //load env
@@ -9,13 +11,21 @@ dotenv.config({ path: "./config/config.env" });
 
 connectDB();
 
+
+
 //route files
 const products = require("./routes/products");
+const auth = require("./routes/auth");
 
 const app = express();
 
+app.use(bodyParser.json());
+//cookie parser
+app.use(cookieParser());
+
+
 //mount routes
-app.use("/api/products", products);
+app.use("/api/auth", auth);
 
 
 app.use(errorHandler);

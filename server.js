@@ -14,6 +14,9 @@ const products = require("./routes/products");
 
 const app = express();
 
+//Body parser
+app.use(express.json());
+
 //mount routes
 app.use("/api/products", products);
 

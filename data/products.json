@@ -2,15 +2,15 @@
     "name": "product One",
     "description": "lorem ipsum dolor sit amet, consectetur adipiscing elit",
     "price": 300,
-    "dicount": 5,
+    "discount": 5,
     "usage": "lorem ipsum dolor sit amet, consectetur adip",
     "details": 
         {
-            "TypeOfCare": "ingrijire",
-            "effect": "cancer",
-            "weight": 1999,
-            "quantity": 100,
-            "country": "Moldova"
+            "effect": "shine",
+            "careType": "for cosmetologists",
+            "weight": 1590,
+            "volume": 1500,
+            "country": "South Korea"
         },
     "count": 10
 }

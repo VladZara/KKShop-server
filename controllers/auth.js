@@ -72,3 +72,14 @@ export const getMe = asyncHandler(async (req, res, next) => {
 
   res.status(200).json({success: true, data: user})
 })
+
+
+
+// @desc        Get all users
+// @route       GEt /api/v1/auth/users
+// @access      Private
+export const getAll = asyncHandler(async (req, res, next) => {
+  const users = await User.find(req.params.id)
+
+  res.status(200).json({users})
+})

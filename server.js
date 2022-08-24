@@ -28,7 +28,11 @@ app.use("/api/auth", auth);
 
 app.use(errorHandler);
 
-const PORT = process.env.PORT || 3002;
+const PORT = process.env.PORT;
+
+app.get('/', (req, res) => {
+  res.send({ express: 'EXPRESS CONNECT TO REACT' }); 
+});
 
 const server = app.listen(
   PORT,
@@ -41,3 +45,4 @@ process.on("unhandledRejection", (err, promise) => {
   //close server & exit process
   server.close(() => process.exit(1));
 });
+

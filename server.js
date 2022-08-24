@@ -1,9 +1,9 @@
-const express = require("express");
-const dotenv = require("dotenv");
-const connectDB = require("./config/db");
-const errorHandler = require("./middleware/error");
-const bodyParser = require("body-parser");
-const cookieParser = require("cookie-parser");
+import express from "express";
+import dotenv from "dotenv";
+import cookieParser from "cookie-parser";
+import bodyParser from "body-parser";
+import connectDB from "./config/db.js";
+import errorHandler from "./middleware/error.js";
 
 
 //load env
@@ -11,11 +11,9 @@ dotenv.config({ path: "./config/config.env" });
 
 connectDB();
 
-
-
 //route files
-const products = require("./routes/products");
-const auth = require("./routes/auth");
+import products from "./routes/products.js";
+import auth from "./routes/auth.js";
 
 const app = express();
 

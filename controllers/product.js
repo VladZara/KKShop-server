@@ -80,7 +80,7 @@ export const deleteProduct = asyncHandler(async (req, res, next) => {
 })
 
 //upload photo for product
-export const productPhotoUpload = asyncHandler(async(req, res, next) => {
+exports.productPhotoUpload = asyncHandler(async(req, res, next) => {
 
     const product = await Product.findById(req.params.id);
 

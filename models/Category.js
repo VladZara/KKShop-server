@@ -1,4 +1,5 @@
-import {Schema, model} from ("mongoose");
+import {Schema, model} from "mongoose";
+import mongoose from "mongoose";
 
 const CategorySchema = new Schema({
     name: {
@@ -11,7 +12,24 @@ const CategorySchema = new Schema({
     language: {
         type: String,
         required: false
+    },
+    product: {
+        type: mongoose.Schema.ObjectId,
+        ref: 'Product',
+        required: true
     }
+},{
+    toJSON:{ virtuals: true},
+    toObject:{virtuals:true}
 });
+
+
+// Reverse populate with virtuals
+CategorySchema.virtual('products', {
+    ref: 'Product',
+    localField: '_id',
+    foreignField: 'category',
+    justOne: false
+})
 
 export default model("Category", CategorySchema);

@@ -1,11 +1,11 @@
-const ErrorResponse = require("../utils/errorResponse");
-const asyncHandler = require("../middleware/async");
-const User = require("../models/User");
+import ErrorResponse from "../utils/errorResponse.js";
+import User from "../models/User.js";
+import asyncHandler from "../middleware/async.js";
 
 // @desc        Register user
 // @route       POST /api/auth/register
 // @access      Public
-exports.register = asyncHandler(async (req, res, next) => {
+export const register = asyncHandler(async (req, res, next) => {
   const { name, email, password, role } = req.body;
 
   const user = await User.create({
@@ -18,24 +18,25 @@ exports.register = asyncHandler(async (req, res, next) => {
   sendTokenResponse(user, 200, res);
 });
 
-exports.login = asyncHandler(async (req, res, next) => {
+
+// @desc        Login user
+// @route       POST /api/auth/register
+// @access      Public
+export const login = asyncHandler(async (req, res, next) => {
   const { email, password } = req.body;
 
-  //validate email and password
   if (!email || !password) {
     return next(
       new ErrorResponse("Please provide an email and a password", 400)
     );
   }
 
-  //check for user
   const user = await User.findOne({ email }).select("+password");
 
   if (!user) {
     return next(new ErrorResponse("Invalid credentials", 401));
   }
 
-  //check if password matches
   const isMatch = await user.matchPassword(password);
 
   if (!isMatch) {
@@ -45,9 +46,7 @@ exports.login = asyncHandler(async (req, res, next) => {
   sendTokenResponse(user, 200, res);
 });
 
-//get token from model, create token and send response
 const sendTokenResponse = (user, statusCode, res) => {
-  //create token
   const token = user.getSignedJwtToken();
 
   const options = {
@@ -65,11 +64,10 @@ const sendTokenResponse = (user, statusCode, res) => {
 };
 
 
-
 // @desc        Get current logged in user
 // @route       GEt /api/v1/auth/me
 // @access      Private
-exports.getMe = asyncHandler(async (req, res, next) => {
+export const getMe = asyncHandler(async (req, res, next) => {
   const user = await User.findById(req.user.id)
 
   res.status(200).json({success: true, data: user})

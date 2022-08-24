@@ -1,10 +1,10 @@
-const Product = require("../models/Product");
-const ErrorResponse = require("../utils/ErrorResponse");
-const asyncHandler = require("../middleware/async");
+import Product from "../models/Product.js";
+import ErrorResponse from "../utils/ErrorResponse.js";
+import asyncHandler from "../middleware/async.js";
 
 
 //get all products
-exports.getProducts = asyncHandler(async (req, res, next) => {
+export const getProducts = asyncHandler(async (req, res, next) => {
     const products = await Product.find(req.params.id)
 
     if(!products) {
@@ -17,7 +17,7 @@ exports.getProducts = asyncHandler(async (req, res, next) => {
 })
 
 // get single product
-exports.getProduct = asyncHandler(async (req, res, next) => {
+export const getProduct = asyncHandler(async (req, res, next) => {
     const product = await Product.findById(req.params.id)
 
     if (!product) {
@@ -34,7 +34,7 @@ exports.getProduct = asyncHandler(async (req, res, next) => {
 
 
 // add new product
-exports.createProduct = asyncHandler(async (req, res, next) => {
+export const createProduct = asyncHandler(async (req, res, next) => {
     
     const product = await Product.create(req.body);
 
@@ -45,7 +45,7 @@ exports.createProduct = asyncHandler(async (req, res, next) => {
 });
 
 //update product
-exports.updateProduct = asyncHandler(async (req,res,next) => {
+export const updateProduct = asyncHandler(async (req,res,next) => {
     let product = await Product.findById(req.params.id);
     if (!product) {
         return next(
@@ -66,7 +66,7 @@ exports.updateProduct = asyncHandler(async (req,res,next) => {
 });
 
 //delete product
-exports.deleteProduct = asyncHandler(async (req, res, next) => {
+export const deleteProduct = asyncHandler(async (req, res, next) => {
     const product = await Product.findById(req.params.id);
 
     if (!product){

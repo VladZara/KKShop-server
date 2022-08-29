@@ -46,6 +46,7 @@ const ProductSchema = new Schema({
         },
         photo: {
             type: String,
+            required: true,
             default: 'no-photo.jpg'
         },
         category: {

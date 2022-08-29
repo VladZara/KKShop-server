@@ -4,11 +4,15 @@ import {
     getProduct,
     createProduct, 
     updateProduct, 
-    deleteProduct
+    deleteProduct,
+    productPhotoUpload
  } from '../controllers/product.js';
 
 
 const router = Router();
+
+router.route('/:id/photo').put(productPhotoUpload);
+
 
 router.route("/").get(getProducts).post(createProduct);
 router.route('/:id')
